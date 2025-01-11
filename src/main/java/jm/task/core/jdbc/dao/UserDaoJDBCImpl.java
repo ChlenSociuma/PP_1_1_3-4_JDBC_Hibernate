@@ -71,8 +71,14 @@ public class UserDaoJDBCImpl implements UserDao {
     @Override
     public void removeUserById(long id) {
         String removeUserSQL = "DELETE FROM users WHERE id = ?";
-        try (Statement statement = connection.createStatement()) {
-            statement.execute(removeUserSQL);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(removeUserSQL)) {
+            preparedStatement.setLong(1, id);
+            int LinesAfterStatement = preparedStatement.executeUpdate();
+            if (LinesAfterStatement > 0) {
+                System.out.println("Пользователь с id " + id + " удален.");
+            } else {
+                System.out.println("Нет пользователя с id " + id + ".");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Ошибка при удалении юзера.");
