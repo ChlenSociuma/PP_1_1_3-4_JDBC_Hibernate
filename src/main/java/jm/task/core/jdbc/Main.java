@@ -19,9 +19,7 @@ public class Main {
         User user4 = new User("Mike", "Vazovskiy", (byte) 20);
         userService.saveUser(user4.getName(), user4.getLastName(), user4.getAge());
         List<User> users = userService.getAllUsers();
-        for (User oneUser : users) {
-            System.out.println(oneUser);
-        }
+        users.stream().forEach(System.out::println);
         userService.cleanUsersTable();
         userService.dropUsersTable();
     }
