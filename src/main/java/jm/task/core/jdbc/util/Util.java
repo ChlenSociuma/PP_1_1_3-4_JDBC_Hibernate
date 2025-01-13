@@ -15,11 +15,11 @@ import java.sql.SQLException;
 public class Util {
     private static Connection connection;
     private static SessionFactory sessionFactory;
+    private static final String url = "jdbc:postgresql://localhost:5432/habrdb";
+    private static final String user = "habrpguser";
+    private static final String pass = "3232";
     public static Connection getConnection() throws SQLException {
         if (connection == null) {
-            String url = "jdbc:postgresql://localhost:5432/habrdb";
-            String user = "habrpguser";
-            String pass = "3232";
             connection = DriverManager.getConnection(url, user, pass);
             System.out.println("JDBC соединение установлено.");
         }
@@ -32,9 +32,9 @@ public class Util {
 
             Properties settings = new Properties();
             settings.put(Environment.DRIVER, "org.postgresql.Driver");
-            settings.put(Environment.URL, "jdbc:postgresql://localhost:5432/habrdb");
-            settings.put(Environment.USER, "habrpguser");
-            settings.put(Environment.PASS, "3232");
+            settings.put(Environment.URL, url);
+            settings.put(Environment.USER, user);
+            settings.put(Environment.PASS, pass);
             settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
             settings.put(Environment.SHOW_SQL, "false");
             settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
